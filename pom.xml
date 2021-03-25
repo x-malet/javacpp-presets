@@ -5,9 +5,7 @@
   <groupId>org.bytedeco</groupId>
   <artifactId>javacpp-presets</artifactId>
   <version>1.5.6-SNAPSHOT</version>
-    <modules>
-        <module>sfcgal4j</module>
-    </modules>
+
     <packaging>pom</packaging>
 
   <name>JavaCPP Presets</name>
@@ -1364,6 +1362,8 @@
         <module>skia</module>
         <module>cpu_features</module>
         <module>systems</module>
+        <module>sfcgal4j</module>
+
       </modules>
       <properties>
         <javacpp.platform.android-arm></javacpp.platform.android-arm>
@@ -1439,6 +1439,8 @@
         <module>skia</module>
         <module>cpu_features</module>
         <module>systems</module>
+        <module>sfcgal4j</module>
+
       </modules>
       <properties>
         <javacpp.platform.android-arm></javacpp.platform.android-arm>

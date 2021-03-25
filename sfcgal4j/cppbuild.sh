@@ -56,8 +56,8 @@ function install_cgal_swig_bindings() {
   mkdir -p build/CGAL-5.0_release -p
   cd build/CGAL-5.0_release
   export CGAL_DIR="$INSTALL_PATH/lib/cmake/CGAL"
-#    cmake -DCGAL_DIR=$CGAL_LIBRARY_DIRS -DBUILD_JAVA=ON -DBUILD_PYTHON=OFF -DJAVA_OUTDIR_PREFIX=$CGAL_SWIG_JAVA -DCMAKE_BUILD_TYPE=Release ../..
-#    make -j $MAKEJ
+    cmake -DCGAL_DIR=$CGAL_LIBRARY_DIRS -DBUILD_JAVA=ON -DBUILD_PYTHON=OFF -DJAVA_OUTDIR_PREFIX=$CGAL_SWIG_JAVA -DCMAKE_BUILD_TYPE=Release ../..
+    make -j $MAKEJ
   cd $INSTALL_PATH/../../
   mkdir -p src/gen/java/org/bytedeco
   cp -r $CGAL_SWIG_JAVA/CGAL src/gen/java/org/bytedeco
@@ -75,9 +75,9 @@ function install_sfcgal() {
 }
 
 function install_for_linux() {
-#  install_cgal
+  install_cgal
   install_cgal_swig_bindings
-#  install_sfcgal
+  install_sfcgal
 
 }
 
