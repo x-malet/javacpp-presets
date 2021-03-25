@@ -33,106 +33,55 @@
     </dependencies>
 
     <build>
+
         <plugins>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
             <plugin>
                 <groupId>org.bytedeco</groupId>
                 <artifactId>javacpp</artifactId>
-                <version>${project.parent.version}</version>
                 <configuration>
-                    <properties>${javacpp.platform}</properties>
-                    <propertyKeysAndValues>
-                        <property>
-                            <name>platform.root</name>
-                            <value>${javacpp.platform.root}</value>
-                        </property>
-                        <property>
-                            <name>platform.compiler</name>
-                            <value>${javacpp.platform.compiler}</value>
-                        </property>
-                    </propertyKeysAndValues>
-                    <classPath>${project.build.outputDirectory}</classPath>
-                    <includePath>${basedir}/cppbuild/${javacpp.platform}/include/</includePath>
-                    <linkPath>${basedir}/cppbuild/${javacpp.platform}/lib/</linkPath>
-                    <preloadPath>${basedir}/cppbuild/${javacpp.platform}/bin/</preloadPath>
+                    <encoding>ISO-8859-1</encoding>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.bytedeco</groupId>
+                        <artifactId>cuda</artifactId>
+                        <version>11.2-8.1-${project.parent.version}</version>
+                    </dependency>
+                </dependencies>
                 <executions>
                     <execution>
-                        <id>javacpp.parser</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>build</goal>
-                        </goals>
-                        <configuration>
-                            <skip>${javacpp.parser.skip}</skip>
-                            <outputDirectory>${project.build.sourceDirectory}</outputDirectory>
-                            <classOrPackageName>org.bytedeco.javacpp.presets.*</classOrPackageName>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>javacpp.compiler</id>
+                        <id>javacpp-compiler</id>
                         <phase>process-classes</phase>
                         <goals>
                             <goal>build</goal>
                         </goals>
                         <configuration>
-                            <skip>${javacpp.compiler.skip}</skip>
-                            <classOrPackageName>org.bytedeco.javacpp.*</classOrPackageName>
                             <copyLibs>true</copyLibs>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
-
             <plugin>
                 <artifactId>maven-jar-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>default-jar</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                        <configuration>
-                            <archive>
-                                <manifestEntries>
-                                    <Class-Path>.</Class-Path>
-                                    <Name>org/bytedeco/sfcgal4j/presets</Name>
-                                    <Implementation-Title>${project.name}</Implementation-Title>
-                                    <Implementation-Vendor>ulaval</Implementation-Vendor>
-                                    <Implementation-Version>${project.version}</Implementation-Version>
-                                    <Specification-Title>${project.name}</Specification-Title>
-                                    <Specification-Vendor>ulaval</Specification-Vendor>
-                                    <Specification-Version>${project.version}</Specification-Version>
-                                </manifestEntries>
-                            </archive>
-                            <includes>
-                                <include>${basedir}/src/main/java/org/bytedeco/sfcgal4j/presets/*</include>
-                            </includes>
-                            <excludes>
-                                <exclude>${basedir}/cppbuild/</exclude>
-
-                            </excludes>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>${javacpp.platform}</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                        <configuration>
-                            <classifier>${javacpp.platform}</classifier>
-                            <skipIfEmpty>true</skipIfEmpty>
-                            <includes>
-                                <include>e${basedir}/cppbuild/${javacpp.platform}</include>
-                                <include>${basedir}/cppbuild/${javacpp.platform}/lib/</include>
-                                <include>${basedir}/cppbuild/${javacpp.platform}/include</include>
-                            </includes>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
-
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <encoding>ISO-8859-1</encoding>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
